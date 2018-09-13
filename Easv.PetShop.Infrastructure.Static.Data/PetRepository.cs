@@ -12,7 +12,7 @@ namespace Easv.PetShop.Infrastructure.Static.Data
 
         public PetRepository()
         {
-            
+           
         }
 
         public void CreatePet(Pet pet)
@@ -49,6 +49,7 @@ namespace Easv.PetShop.Infrastructure.Static.Data
             PetToUpdate.PetPrice = pet.PetPrice;
             PetToUpdate.SoldDate = pet.SoldDate;
             PetToUpdate.PetColor = pet.PetColor;
+            PetToUpdate.PetOwner = pet.PetOwner;
         }
 
         public Pet GetPetByID(int petId)

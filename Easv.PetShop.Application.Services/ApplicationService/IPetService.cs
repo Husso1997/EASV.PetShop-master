@@ -22,5 +22,6 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService
         List<Pet> GetFiveCheapestPets();
 
         Owner GetOwner(int petId);
+        MyEnum GetPetTypeEnum(string type);
     }
 }

@@ -75,5 +75,20 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
             Owner owner = GetPetByID(petId).PetOwner;
             return owner;
         }
+
+        public MyEnum GetPetTypeEnum(string type)
+        {
+            string petType = type.ToLower();
+            switch (type)
+            {
+                case "cat":
+                    return MyEnum.Cat;
+                case "dog":
+                    return MyEnum.Dog;
+                case "goat":
+                    return MyEnum.Goat;
+            }
+            return MyEnum.Unknown;
+        }
     }
 }

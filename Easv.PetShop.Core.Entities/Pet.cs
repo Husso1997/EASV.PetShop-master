@@ -14,15 +14,13 @@ namespace Easv.PetShop.Core.Entities
 
     public class Pet
     {
-        MyEnum PetEnum;
-
         public int PetID { get; set; }
         public string PetName { get; set; }
 
         public MyEnum PetType { get; set; }
         public DateTime PetBirthDate { get; set; }
         public DateTime SoldDate { get; set; }
-        public string PetColor { get; set; }
+        public List<PetColour> PetColors { get; set; }
         public string PetPreviousOwner { get; set; }
         public double PetPrice { get; set; }
         public Owner PetOwner { get; set; }

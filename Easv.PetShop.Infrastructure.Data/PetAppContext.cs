@@ -21,6 +21,15 @@ namespace Easv.PetShop.Infrastructure.Data
 
             modelBuilder.Entity<Pet>().HasOne<Owner>(o => o.PetOwner).
                  WithMany(o => o.Pets).OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<PetColour>().HasKey(pc => new { pc.PetId, pc.ColourId });
+
+            modelBuilder.Entity<PetColour>().HasOne<Pet>(pc => pc.Pet).
+                WithMany(p => p.PetColors).HasForeignKey(p => p.PetId);
+
+            modelBuilder.Entity<PetColour>().HasOne<Colour>(c => c.Colour).
+                WithMany(c => c.Pets).HasForeignKey(p => p.ColourId);
+
         }
 
 

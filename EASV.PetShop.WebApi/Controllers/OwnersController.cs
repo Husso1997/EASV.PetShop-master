@@ -11,11 +11,11 @@ namespace EASV.PetShop.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OwnerController : ControllerBase
+    public class OwnersController : ControllerBase
     {
         IOwnerService ownerService;
 
-        public OwnerController(IOwnerService ownerService)
+        public OwnersController(IOwnerService ownerService)
         {
             this.ownerService = ownerService;
           

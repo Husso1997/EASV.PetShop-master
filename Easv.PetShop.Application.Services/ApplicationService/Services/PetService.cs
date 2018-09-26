@@ -72,8 +72,7 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
 
         public Owner GetOwner(int petId)
         {
-            Owner owner = GetPetByID(petId).PetOwner;
-            return owner;
+            return petRepository.GetOwner(petId);
         }
 
         public MyEnum GetPetTypeEnum(string type)
@@ -89,6 +88,11 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
                     return MyEnum.Goat;
             }
             return MyEnum.Unknown;
+        }
+
+        public List<Pet> GetAllPetsFiltered(Filter filter)
+        {
+            return petRepository.GetAllPets(filter).ToList();
         }
     }
 }

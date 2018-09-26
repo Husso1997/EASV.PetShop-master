@@ -10,19 +10,19 @@ namespace EASV.PetShop.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class PetsController : ControllerBase
     {
         private IPetService petService;
-        public ValuesController(IPetService petService)
+        public PetsController(IPetService petService)
         {
             this.petService = petService;
         }
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Pet>> Get()
+        public ActionResult<IEnumerable<Pet>> Get([FromQuery] Filter filter)
         {
-            return petService.GetAllPets().ToList();
+            return petService.GetAllPetsFiltered(filter).ToList();
         }
 
         // GET api/values/5

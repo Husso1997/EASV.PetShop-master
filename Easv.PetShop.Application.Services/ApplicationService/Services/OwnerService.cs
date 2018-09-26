@@ -20,7 +20,7 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
         public List<Pet> GetOwnerPets(int id)
         {
             Owner owner = ownerRepository.GetOwnerById(id);
-            return owner.GetPets();
+            return owner.Pets;
         }
 
         public void CreateOwner(Owner owner)

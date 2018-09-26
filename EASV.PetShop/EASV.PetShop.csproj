@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Easv.PetShop.Application.Services\Easv.PetShop.Core.Application.Services.csproj" />
-    <ProjectReference Include="..\Easv.PetShop.Infrastructure.Static.Data\Easv.PetShop.Infrastructure.Static.Data.csproj" />
   </ItemGroup>
 
 </Project>

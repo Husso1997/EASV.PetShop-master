@@ -7,7 +7,7 @@ namespace Easv.PetShop.Application.Services.DomainService
 {
     public interface IPetRepository
     {
-        IEnumerable<Pet> GetAllPets();
+        IEnumerable<Pet> GetAllPets(Filter filter = null);
 
         bool DeletePet(int petId);
 

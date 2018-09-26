@@ -8,6 +8,7 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService
     public interface IPetService
     {
         IEnumerable<Pet> GetAllPets();
+        List<Pet> GetAllPetsFiltered(Filter filter);
 
         bool DeletePet(int petId);
 

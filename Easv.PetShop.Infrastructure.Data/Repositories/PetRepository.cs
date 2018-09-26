@@ -41,9 +41,10 @@ namespace Easv.PetShop.Infrastructure.Data
         {
             if(filter == null)
             {
-                return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors);
+                return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).ThenInclude(pc => pc.Colour);
             }
-            return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
+            return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).ThenInclude(pc => pc.Colour.Color).
+                Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
                 .Take(filter.ItemsPrPage);
             
         }

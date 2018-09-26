@@ -31,7 +31,6 @@ namespace Easv.PetShop.Infrastructure.Data
                     PetPreviousOwner = "None",
                     PetBirthDate = new DateTime(1995, 2, 20),
                     SoldDate = DateTime.Today,
-                    PetColor = "red",
                     PetOwner = owner,
                 };
                 

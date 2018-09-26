@@ -63,7 +63,7 @@ namespace Easv.PetShop.Infrastructure.Data
         {
             _pac.Attach(pet).State = EntityState.Modified;
             _pac.Entry(pet).Reference(p => p.PetOwner).IsModified = true;
-            _pac.Entry(pet).Collection(p => p.PetColors).IsModified = true;
+            pet.PetColors = null;
             _pac.SaveChanges();
         }
     }

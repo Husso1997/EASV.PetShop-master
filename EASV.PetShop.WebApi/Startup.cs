@@ -84,7 +84,7 @@ namespace EASV.PetShop.WebApi
                 }
                 app.UseHsts();
             }
-            app.UseCors(builder => builder.WithOrigins("https://easv-petshop.azurewebsites.net").AllowAnyMethod());
+            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseHttpsRedirection();
             app.UseMvc();
         }

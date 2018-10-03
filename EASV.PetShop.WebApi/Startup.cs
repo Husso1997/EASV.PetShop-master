@@ -52,7 +52,7 @@ namespace EASV.PetShop.WebApi
                 services.AddDbContext<PetAppContext>
                     (opt => opt.UseSqlServer(_conf.GetConnectionString("defaultconnection")));
             }
-            
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
@@ -84,8 +84,8 @@ namespace EASV.PetShop.WebApi
                 }
                 app.UseHsts();
             }
-
-            //app.UseHttpsRedirection();
+            app.UseCors(builder => builder.WithOrigins("https://easv-petshop.azurewebsites.net").AllowAnyMethod());
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

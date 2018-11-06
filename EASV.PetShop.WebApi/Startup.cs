@@ -52,7 +52,7 @@ namespace EASV.PetShop.WebApi
                 services.AddDbContext<PetAppContext>
                     (opt => opt.UseSqlServer(_conf.GetConnectionString("defaultconnection")));
             }
-            services.AddCors();
+            services.AddCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
@@ -84,7 +84,7 @@ namespace EASV.PetShop.WebApi
                 }
                 app.UseHsts();
             }
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseCors();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

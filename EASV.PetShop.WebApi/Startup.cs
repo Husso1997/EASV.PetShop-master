@@ -7,6 +7,7 @@ using Easv.PetShop.Core.Application.Services.ApplicationService;
 using Easv.PetShop.Core.Application.Services.ApplicationService.Services;
 using Easv.PetShop.Core.Application.Services.DomainService;
 using Easv.PetShop.Infrastructure.Data;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ using Newtonsoft.Json;
 
 namespace EASV.PetShop.WebApi
 {
+    [EnableCors("MyPolicy")]
     public class Startup
     {
         /*public Startup(IConfiguration configuration)
@@ -52,7 +54,14 @@ namespace EASV.PetShop.WebApi
                 services.AddDbContext<PetAppContext>
                     (opt => opt.UseSqlServer(_conf.GetConnectionString("defaultconnection")));
             }
-            services.AddCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            
+                services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                }));
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
@@ -84,7 +93,7 @@ namespace EASV.PetShop.WebApi
                 }
                 app.UseHsts();
             }
-            app.UseCors();
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Easv.PetShop.Core.Application.Services.ApplicationService;
 using Easv.PetShop.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EASV.PetShop.WebApi.Controllers
@@ -26,13 +28,16 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // GET api/values/5
+       // [Authorize(Roles = "Administrator")]
         [HttpGet("{id}")]
         public ActionResult<Pet> Get(int id)
         {
+                
             return petService.GetPetByID(id);
         }
 
         // POST api/values
+       // [Authorize(Roles = "Administrator")]
         [HttpPost]
         public void Post([FromBody] Pet value)
         {

@@ -6,7 +6,11 @@ using Easv.PetShop.Application.Services.DomainService;
 using Easv.PetShop.Core.Application.Services.ApplicationService;
 using Easv.PetShop.Core.Application.Services.ApplicationService.Services;
 using Easv.PetShop.Core.Application.Services.DomainService;
+using Easv.PetShop.Core.Entities;
 using Easv.PetShop.Infrastructure.Data;
+using Easv.PetShop.Infrastructure.Data.Repositories;
+using EASV.PetShop.WebApi.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace EASV.PetShop.WebApi
@@ -43,6 +48,20 @@ namespace EASV.PetShop.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = JwtSecurityKey.Key,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromMinutes(30),
+
+                };
+            });
+
             if(_env.IsDevelopment())
             {
                 services.AddDbContext<PetAppContext>(opt => opt.UseSqlite("Data Source = petApp.db"));
@@ -58,6 +77,8 @@ namespace EASV.PetShop.WebApi
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IUserRepository<User>, UserRepository>();
+            services.AddScoped<IUserService<User>, UserService>();
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
@@ -84,8 +105,9 @@ namespace EASV.PetShop.WebApi
                 }
                 app.UseHsts();
             }
-            app.UseCors(builder => builder.AllowAnyOrigin());
             app.UseHttpsRedirection();
+            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

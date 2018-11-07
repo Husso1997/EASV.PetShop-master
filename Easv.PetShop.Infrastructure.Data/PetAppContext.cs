@@ -14,6 +14,7 @@ namespace Easv.PetShop.Infrastructure.Data
         }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<Owner> Owners { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

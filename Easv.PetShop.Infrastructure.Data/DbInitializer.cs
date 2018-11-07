@@ -8,8 +8,12 @@ namespace Easv.PetShop.Infrastructure.Data
 {
     public class DbInitializer
     {
+        
+
         public static void SeedDb(PetAppContext pac)
         {
+            byte[] passwordHashDavid, passwordSaltDavid;
+            CreatePassword("1234", out passwordHashDavid, out passwordSaltDavid);   
             pac.Database.EnsureDeleted();
             pac.Database.EnsureCreated();
 
@@ -33,11 +37,28 @@ namespace Easv.PetShop.Infrastructure.Data
                     SoldDate = DateTime.Today,
                     PetOwner = owner,
                 };
-                
+                pac.Users.Add(new User
+                {
+                    IsAdmin = true,
+                    Username = "David",
+                    PasswordHash = passwordHashDavid,
+                    PasswordSalt = passwordSaltDavid
+                });
                 pac.Pets.Add(pet);
                 
             }
+
             pac.SaveChanges();
+        }
+
+        public static void CreatePassword(string password, out byte[] passwordHash,
+            out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
 
         public static MyEnum GetEnumType(int index)

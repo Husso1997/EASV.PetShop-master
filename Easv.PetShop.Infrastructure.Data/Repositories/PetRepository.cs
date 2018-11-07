@@ -41,9 +41,9 @@ namespace Easv.PetShop.Infrastructure.Data
         {
             if(filter.ItemsPrPage == 0 || filter.CurrentPage == 0)
             {
-                return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).ThenInclude(pc => pc.Colour);
+                return _pac.Pets;
             }
-            return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).ThenInclude(pc => pc.Colour).
+            return _pac.Pets.
                 Skip((filter.CurrentPage - 1) * filter.ItemsPrPage)
                 .Take(filter.ItemsPrPage);
             

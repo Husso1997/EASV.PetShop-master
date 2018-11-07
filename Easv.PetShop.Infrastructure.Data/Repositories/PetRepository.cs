@@ -56,7 +56,7 @@ namespace Easv.PetShop.Infrastructure.Data
 
         public Pet GetPetByID(int petId)
         {
-            return _pac.Pets.Include(p => p.PetOwner).FirstOrDefault(p => p.PetID == petId);
+            return _pac.Pets.Include(p => p.PetOwner).Include(p => p.PetColors).ThenInclude(pc => pc.Colour).FirstOrDefault(p => p.PetID == petId);
         }
 
         public void UpdatePet(Pet pet)

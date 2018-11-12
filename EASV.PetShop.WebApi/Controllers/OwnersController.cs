@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Easv.PetShop.Core.Application.Services.ApplicationService.Services;
 using Easv.PetShop.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,7 @@ namespace EASV.PetShop.WebApi.Controllers
           
         }
         // GET: api/Owner
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IEnumerable<Owner> Get()
         {
@@ -28,6 +30,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // GET: api/Owner/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}", Name = "Get")]
         public Owner Get(int id)
         {
@@ -35,6 +38,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // POST: api/Owner
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public void Post([FromBody] Owner value)
         {
@@ -42,6 +46,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // PUT: api/Owner/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Owner value)
         {
@@ -50,6 +55,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

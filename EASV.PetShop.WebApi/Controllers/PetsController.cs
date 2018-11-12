@@ -21,25 +21,11 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // GET api/values
-       //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get([FromQuery] Filter filter)
         {
-            byte[] passwordHashDavid, passwordSaltDavid;
-            CreatePassword("1234", out passwordHashDavid, out passwordSaltDavid);
-            Console.WriteLine(passwordSaltDavid);
-            Console.WriteLine(passwordHashDavid);
             return petService.GetAllPetsFiltered(filter).ToList();
-        }
-
-        public static void CreatePassword(string password, out byte[] passwordHash,
-    out byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512())
-            {
-                passwordSalt = hmac.Key;
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-            }
         }
 
         // GET api/values/5
@@ -52,7 +38,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // POST api/values
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public void Post([FromBody] Pet value)
         {

@@ -21,7 +21,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // GET api/values
-       [Authorize(Roles = "Administrator")]
+       //[Authorize(Roles = "Administrator")]
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get([FromQuery] Filter filter)
         {

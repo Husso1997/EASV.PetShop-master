@@ -52,7 +52,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         // POST api/values
-        [Authorize(Roles = "Administrator")]
+        //[Authorize(Roles = "Administrator")]
         [HttpPost]
         public void Post([FromBody] Pet value)
         {

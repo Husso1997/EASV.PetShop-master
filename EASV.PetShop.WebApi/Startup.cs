@@ -109,6 +109,7 @@ namespace EASV.PetShop.WebApi
                 {
                     var pac = scope.ServiceProvider.GetService<PetAppContext>();
                     pac.Database.EnsureCreated();
+                    DbInitializer.SeedDb(pac);
                 }
                 app.UseHsts();
             }

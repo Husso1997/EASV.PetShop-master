@@ -1,6 +1,7 @@
 ﻿using Easv.PetShop.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -45,7 +46,6 @@ namespace Easv.PetShop.Infrastructure.Data
                     PasswordSalt = passwordSaltDavid
                 });
                 pac.Pets.Add(pet);
-                
             }
 
             pac.SaveChanges();

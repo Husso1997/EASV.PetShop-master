@@ -43,7 +43,7 @@ namespace EASV.PetShop.WebApi.Controllers
                 return Unauthorized();
             }
 
-            return Ok(new { username = user.Username, token = GenerateToken(user)});
+            return Ok(new { username = user.Username, token = GenerateToken(user) });
 
         }
 

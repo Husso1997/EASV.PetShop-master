@@ -57,7 +57,6 @@ namespace EASV.PetShop.WebApi
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = JwtSecurityKey.Key,
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(0)
 
                 };
             });

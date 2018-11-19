@@ -78,7 +78,7 @@ namespace EASV.PetShop.WebApi.Controllers
                                null, // audience - not needed (ValidateAudience = false)
                                claims.ToArray(),
                                DateTime.Now,               // notBefore
-                               DateTime.Now.AddSeconds(60)));  // expires
+                               DateTime.Now.AddSeconds(1)));  // expires
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

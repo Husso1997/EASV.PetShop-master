@@ -15,6 +15,16 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
             _repo = repo;
         }
 
+        public static void CreatePassword(string password, out byte[] passwordHash,
+    out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
         public void Add(User entity)
         {
             _repo.Add(entity);

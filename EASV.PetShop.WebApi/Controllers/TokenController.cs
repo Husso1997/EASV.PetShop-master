@@ -26,6 +26,25 @@ namespace EASV.PetShop.WebApi.Controllers
             _service = userService;
         }
 
+        //POST: api/t
+        [HttpPost]
+        [Route("createUser")]
+        public string CreateUser([FromBody] CreateUserInputModel model)
+        {
+            byte[] passwordHashUser, passwordSaltUser;
+            _service.CreatePassword(model.Password, out passwordHashUser, out passwordSaltUser);
+            User user = new User
+            {
+                PasswordHash = passwordHashUser,
+                PasswordSalt = passwordSaltUser,
+                IsAdmin = model.IsAdmin,
+                Username = model.Username
+            };
+
+            _service.Add(user);
+            return "TEST";
+        }
+
         // POST: api/Token
         [HttpPost]
         public IActionResult Login([FromBody] LoginInputModel model)

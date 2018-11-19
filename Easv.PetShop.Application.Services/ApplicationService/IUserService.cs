@@ -11,5 +11,8 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService
         void Add(T entity);
         void Edit(T entity);
         void Remove(long id);
+        void CreatePassword(string password, out byte[] passwordHash,
+            out byte[] passwordSalt);
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace Easv.PetShop.Core.Application.Services.ApplicationService.Services
             _repo = repo;
         }
 
-        public static void CreatePassword(string password, out byte[] passwordHash,
+        public void CreatePassword(string password, out byte[] passwordHash,
     out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())

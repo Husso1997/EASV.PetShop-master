@@ -27,7 +27,8 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         //POST: api/t
-        [HttpPost("/createUser")]
+        [Route("createUser")]
+        [HttpPost]
         public void CreateUser([FromBody] CreateUserInputModel model)
         {
             byte[] passwordHashUser, passwordSaltUser;

@@ -27,8 +27,7 @@ namespace EASV.PetShop.WebApi.Controllers
         }
 
         //POST: api/t
-        [Route("/createUser")]
-        [HttpPost]
+        [HttpPost("/createUser")]
         public void CreateUser([FromBody] CreateUserInputModel model)
         {
             byte[] passwordHashUser, passwordSaltUser;
@@ -83,7 +82,7 @@ namespace EASV.PetShop.WebApi.Controllers
             var claims = new List<Claim>
             {
                 new Claim("username", user.Username)
-            }
+            };
 
             if (user.IsAdmin)
                 claims.Add(new Claim("role", "Administrator"));
